@@ -18,17 +18,12 @@ namespace ImageProcessingApp
         public Form3()
         {
             InitializeComponent();
-            timer1.Start();
         }
 
         private void loadCameraButton_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                device = new Device();
-                this.Invoke((Action)(() => device.ShowWindow(pictureBox1)));
-            });
-            timer1.Enabled = true;
+            device = new Device();
+            device.ShowWindow(pictureBox1);
         }
 
         private void loadBackgroundButton_Click(object sender, EventArgs e)
@@ -40,20 +35,6 @@ namespace ImageProcessingApp
         {
             string file = openFileDialog1.FileName;
             pictureBox2.Image = Image.FromFile(file);
-        }
-
-        private void subtractButton_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image == null || pictureBox2.Image == null)
-            {
-                MessageBox.Show("Please enable camera and insert a background.");
-                return;
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
         }
     }
 }
